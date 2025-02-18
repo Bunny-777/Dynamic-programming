@@ -53,19 +53,35 @@ using namespace std;
 
 // tabulation method which only use O(n) time complexity and O(1) space complexity
 
+// int main(){
+//     vector<int> vec={30, 20, 50, 10, 40};
+//     int n=vec.size();
+//     vector<int> dp(n,-1);
+//     dp[0]=0;
+//     for(int i=1;i<n;i++){
+//         int fs=dp[i-1]+abs(vec[i]-vec[i-1]);
+//         int ss=INT_MAX;
+//         if(i>1){
+//              ss=dp[i-2]+abs(vec[i]-vec[i-2]);
+//         }
+//         dp[i]=min(fs,ss);
+//     }
+//      cout<<dp[n-1]; 
+// }
+
+
+// using space optmizatoin as where you find index-1 and index-2 there will be space optmisation
 int main(){
     vector<int> vec={30, 20, 50, 10, 40};
     int n=vec.size();
-    vector<int> dp(n,-1);
-    dp[0]=0;
-    for(int i=1;i<n;i++){
-        int fs=dp[i-1]+abs(vec[i]-vec[i-1]);
-        int ss=INT_MAX;
-        if(i>1){
-             ss=dp[i-2]+abs(vec[i]-vec[i-2]);
-        }
-        dp[i]=min(fs,ss);
-    }
-    cout<<dp[n-1];
-    
+    int prev2=0;
+    int prev1=abs(vec[1]-vec[0]);
+    for(int i=2;i<n;i++){
+        int x=prev1+abs(vec[i]-vec[i-1]);
+        int y=prev2+abs(vec[i]-vec[i-2]);
+        int z=min(x,y);
+        prev2=prev1;
+        prev1=z;
+        cout<<z<<"  ";
+    } 
 }
